@@ -1,16 +1,7 @@
-import { Post } from "@/interfaces/data";
-import getPosts from "../utils/getPosts";
-
-import { useEffect, useState } from "react";
-import sortByDate from "@/utils/sortByDate";
+import usePosts from "@/hooks/usePosts";
 
 const Home = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    const storedPosts = getPosts();
-    setPosts(sortByDate<Post>(storedPosts));
-  }, []);
+  const { posts } = usePosts();
 
   return (
     <div>

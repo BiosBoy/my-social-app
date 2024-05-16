@@ -1,39 +1,37 @@
 import { CurrentUser, Friend, Post } from "@/interfaces/data";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import sortByDate from "@/utils/sortByDate";
 import withAuth from "@/auth/withAuth";
-import getPosts from "../utils/getPosts";
-import getUsers from "@/utils/getUsers";
+import getPosts from "../api/getPosts";
+import getUsers from "@/api/getUsers";
 import { useAuth } from "@/auth/AuthContext";
+import usePosts from "@/hooks/usePosts";
 
 const Feed = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { posts } = usePosts();
   const { currentUser } = useAuth();
 
-  useEffect(() => {
+  const sortedPosts = useMemo(() => {
     const users = getUsers();
-    const storedPosts = getPosts();
 
     const currentUserData = users.find(
       (user: CurrentUser) => user.name === currentUser?.name
     );
 
-    setPosts(
-      sortByDate(
-        storedPosts.filter((post: Post) =>
-          currentUserData?.friends.some(
-            (item: Friend) => item.name === post.author.name
-          )
+    return sortByDate(
+      posts.filter((post: Post) =>
+        currentUserData?.friends.some(
+          (item: Friend) => item.name === post.author.name
         )
       )
     );
-  }, [currentUser]);
+  }, [posts, currentUser]);
 
   return (
     <div>
       <h1>Feed</h1>
       <ul>
-        {posts.map((post: Post) => (
+        {sortedPosts.map((post: Post) => (
           <li key={post.date}>
             {post.author.name}: {post.description}
           </li>

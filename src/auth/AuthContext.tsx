@@ -1,7 +1,7 @@
 "use client";
 
 import { CurrentUser } from "@/interfaces/data";
-import getCurrentUser from "@/utils/getCurrentUser";
+import getCurrentUser from "@/api/getCurrentUser";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface AuthContextType {

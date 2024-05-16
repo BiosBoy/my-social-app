@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 
 import data from "@/helpers/dataRandomizer";
-import getPosts from "@/utils/getPosts";
-import getUsers from "@/utils/getUsers";
+import getPosts from "@/api/getPosts";
+import getUsers from "@/api/getUsers";
 
 const useDataInitialize = () => {
   useEffect(() => {

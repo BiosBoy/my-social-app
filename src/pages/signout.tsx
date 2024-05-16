@@ -1,16 +1,7 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "@/auth/AuthContext";
+import useSignout from "@/hooks/useSignout";
 
 const Signout = () => {
-  const router = useRouter();
-  const { setCurrentUser } = useAuth();
-
-  useEffect(() => {
-    sessionStorage.removeItem("currentUser");
-    setCurrentUser(null);
-    router.push("/");
-  }, []);
+  useSignout();
 
   return (
     <div>

@@ -1,36 +1,32 @@
 "use client";
 import { FormEvent, useState } from "react";
-import getPosts from "../utils/getPosts";
+import getPosts from "../api/getPosts";
 import { useAuth } from "@/auth/AuthContext";
 import { createPortal } from "react-dom";
+import usePosts from "@/hooks/usePosts";
 
 const AddPostModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { currentUser } = useAuth();
+
+  const { onUpdatePosts } = usePosts();
 
   const handleSubmit = (
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    const posts = getPosts();
-    posts.push({
-      author: {
-        name: currentUser?.name,
-        id: currentUser?.id,
-      },
-      title,
-      description,
-      date: new Date().toISOString(),
-    });
-    localStorage.setItem("posts", JSON.stringify(posts));
+
+    onUpdatePosts({ title, description });
     setIsOpen(false);
     setTitle("");
     setDescription("");
-    window.location.reload();
   };
+
+  if (!currentUser || !currentUser.name) {
+    return null;
+  }
 
   return (
     <div className="addPost">

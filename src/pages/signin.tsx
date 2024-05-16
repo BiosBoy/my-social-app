@@ -1,37 +1,23 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { CurrentUser } from "@/interfaces/data";
-import getUsers from "@/utils/getUsers";
+import getUsers from "@/api/getUsers";
 import { useAuth } from "@/auth/AuthContext";
+import useSignin from "@/hooks/useSignin";
 
 const Signin = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
-  const { currentUser, setCurrentUser } = useAuth();
-
-  useEffect(() => {
-    if (currentUser) {
-      router.push("/"); // Redirect to sign-in page if not authenticated
-    }
-  }, [currentUser]);
+  const {
+    username,
+    password,
+    onUsernameChange,
+    onPasswordChange,
+    onSubmit,
+    error,
+  } = useSignin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const users = getUsers();
-    const user = users.find(
-      (user: CurrentUser) =>
-        user.name === username && user.password === password
-    );
-    if (user) {
-      setCurrentUser(user);
-      sessionStorage.setItem("currentUser", JSON.stringify(user));
-      setError("");
-      router.push("/");
-    } else {
-      setError("Invalid credentials.");
-    }
+    onSubmit();
   };
 
   return (
@@ -43,7 +29,7 @@ const Signin = () => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => onUsernameChange(e.target.value)}
           />
         </div>
         <div>
@@ -51,7 +37,7 @@ const Signin = () => {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => onPasswordChange(e.target.value)}
           />
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
