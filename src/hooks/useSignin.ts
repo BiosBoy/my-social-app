@@ -11,9 +11,8 @@ const useSignin = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const { currentUser, setCurrentUser } = useAuth();
-
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser?.name) {
       router.push("/"); // Redirect to sign-in page if not authenticated
     }
   }, [currentUser]);

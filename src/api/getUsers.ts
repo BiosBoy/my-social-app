@@ -1,7 +1,9 @@
 import { User } from "@/interfaces/data";
 
 const getUsers = (): User[] => {
-  const users = sessionStorage.getItem("users");
+  const users = localStorage.getItem("users");
+
+  console.log(users, "TST");
 
   if (!users || users === "undefined") {
     return [];
