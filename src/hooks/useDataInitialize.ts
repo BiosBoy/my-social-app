@@ -12,16 +12,12 @@ const useDataInitialize = () => {
     const storedPosts = getPosts();
     const storedUsers = getUsers();
 
-    if (storedPosts?.length > 0) {
-      return;
-    } else {
+    if (!storedPosts?.length) {
       // @ts-ignore
       setPosts(data.posts);
     }
 
-    if (storedUsers?.length > 0) {
-      return;
-    } else {
+    if (!storedUsers?.length) {
       // @ts-ignore
       setUsers(data.users);
     }
