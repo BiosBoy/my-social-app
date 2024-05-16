@@ -1,6 +1,13 @@
 import { Post } from "@/interfaces/data";
 
-const getPosts = (): Post[] =>
-  JSON.parse(localStorage.getItem("posts") || "[]");
+const getPosts = (): Post[] => {
+  const posts = localStorage.getItem("posts");
+
+  if (!posts || posts === "undefined") {
+    return [];
+  }
+
+  return JSON.parse(posts);
+};
 
 export default getPosts;
