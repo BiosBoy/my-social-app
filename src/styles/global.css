@@ -148,6 +148,8 @@ button:hover {
   top: 50%;
   width: 75vh;
   height: 50vh;
+  min-width: 203px;
+  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,4 +175,41 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.burgerMenu {
+  display: none;
+}
+
+.logoWrap {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navMenu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 8px;
+  }
+
+  .burgerMenu {
+    display: block;
+  }
+
+  .logoWrap {
+    display: block;
+  }
+
+  nav {
+    display: none;
+  }
+
+  nav.open {
+    display: block;
+
+    a:not(:last-of-type) {
+      margin-right: 10px;
+    }
+  }
 }

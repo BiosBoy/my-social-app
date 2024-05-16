@@ -1,3 +1,4 @@
+"use client";
 import { FormEvent, useState } from "react";
 import getPosts from "../utils/getPosts";
 import { useAuth } from "@/auth/AuthContext";
