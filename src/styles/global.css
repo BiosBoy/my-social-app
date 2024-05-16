@@ -190,7 +190,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    column-gap: 8px;
+    column-gap: 20px;
   }
 
   .burgerMenu {
