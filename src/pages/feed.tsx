@@ -30,11 +30,15 @@ const Feed = () => {
     <div>
       <h1>Feed</h1>
       <ul>
-        {sortedPosts.map((post: Post) => (
-          <li key={post.date}>
-            {post.author.name}: {post.description}
-          </li>
-        ))}
+        {!sortedPosts.length ? (
+          <p>Nothing to show yet</p>
+        ) : (
+          sortedPosts.map((post: Post) => (
+            <li key={post.date}>
+              {post.author.name}: {post.description}
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
