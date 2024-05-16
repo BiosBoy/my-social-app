@@ -1,3 +1,4 @@
+import getCurrentUser from "@/api/getCurrentUser";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -8,9 +9,7 @@ const withAuth = (WrappedComponent: React.ComponentType<any>) => {
     const router = useRouter();
 
     useEffect(() => {
-      const { name } = JSON.parse(
-        sessionStorage.getItem("currentUser") || "{}"
-      );
+      const { name } = getCurrentUser();
 
       setIsAuthenticated(!!name);
 
