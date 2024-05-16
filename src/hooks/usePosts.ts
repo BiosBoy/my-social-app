@@ -1,16 +1,15 @@
 import { useAuth } from "@/auth/AuthContext";
 import { Post } from "@/interfaces/data";
 import getPosts from "@/api/getPosts";
-import sortByDate from "@/utils/sortByDate";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import setPosts from "@/api/setPosts";
 
 const usePosts = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setStatePosts] = useState<Post[]>([]);
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    const storedPosts = getPosts();
-    setPosts(sortByDate<Post>(storedPosts));
+    setStatePosts(getPosts());
   }, []);
 
   const onUpdatePosts = ({
@@ -24,17 +23,21 @@ const usePosts = () => {
       return;
     }
 
-    const posts = getPosts();
-    posts.push({
-      author: {
-        name: currentUser?.name,
-        id: currentUser?.id,
+    const newPosts = [
+      ...posts,
+      {
+        author: {
+          name: currentUser?.name,
+          id: currentUser?.id,
+        },
+        title,
+        description,
+        date: new Date().toISOString(),
       },
-      title,
-      description,
-      date: Number(new Date().toISOString()),
-    });
-    setPosts(posts);
+    ];
+
+    setStatePosts(newPosts);
+    setPosts(newPosts);
     window.location.reload();
   };
 

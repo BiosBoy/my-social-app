@@ -9,12 +9,16 @@ const Friends = () => {
     <div>
       <h1>My Friends</h1>
       <ul>
-        {friends.map((friend: Friend, index) => (
-          <li key={index}>
-            {friend.name}
-            <button onClick={() => onFriendsChange(friend)}>Unfriend</button>
-          </li>
-        ))}
+        {!friends?.length ? (
+          <p>No friends yet</p>
+        ) : (
+          friends.map((friend: Friend, index) => (
+            <li key={index}>
+              {friend.name}
+              <button onClick={() => onFriendsChange(friend)}>Unfriend</button>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
