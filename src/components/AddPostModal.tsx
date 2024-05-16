@@ -1,6 +1,5 @@
 "use client";
 import { FormEvent, useState } from "react";
-import getPosts from "../api/getPosts";
 import { useAuth } from "@/auth/AuthContext";
 import { createPortal } from "react-dom";
 import usePosts from "@/hooks/usePosts";

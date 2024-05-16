@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import data from "@/helpers/dataRandomizer";
 import getPosts from "@/api/getPosts";
 import getUsers from "@/api/getUsers";
+import setPosts from "@/api/setPosts";
+import setUsers from "@/api/setUsers";
 
 const useDataInitialize = () => {
   useEffect(() => {
@@ -13,13 +15,15 @@ const useDataInitialize = () => {
     if (storedPosts?.length > 0) {
       return;
     } else {
-      localStorage.setItem("posts", JSON.stringify(data.posts));
+      // @ts-ignore
+      setPosts(data.posts);
     }
 
     if (storedUsers?.length > 0) {
       return;
     } else {
-      localStorage.setItem("users", JSON.stringify(data.users));
+      // @ts-ignore
+      setUsers(data.users);
     }
   }, []);
 };

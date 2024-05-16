@@ -2,7 +2,6 @@ import { CurrentUser, Friend, Post } from "@/interfaces/data";
 import { useMemo } from "react";
 import sortByDate from "@/utils/sortByDate";
 import withAuth from "@/auth/withAuth";
-import getPosts from "../api/getPosts";
 import getUsers from "@/api/getUsers";
 import { useAuth } from "@/auth/AuthContext";
 import usePosts from "@/hooks/usePosts";
@@ -20,7 +19,7 @@ const Feed = () => {
 
     return sortByDate(
       posts.filter((post: Post) =>
-        currentUserData?.friends.some(
+        currentUserData?.friends?.some(
           (item: Friend) => item.name === post.author.name
         )
       )

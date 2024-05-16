@@ -2,8 +2,8 @@ import { useAuth } from "@/auth/AuthContext";
 import { CurrentUser } from "@/interfaces/data";
 import getUsers from "@/api/getUsers";
 import { useRouter } from "next/navigation";
-import router from "next/router";
 import { useState, useEffect } from "react";
+import setCurrentUserAPI from "@/api/setCurrentUser";
 
 const useSignin = () => {
   const [username, setUsername] = useState("");
@@ -21,13 +21,12 @@ const useSignin = () => {
   const onSubmit = () => {
     const users = getUsers();
     const user = users.find(
-      (user: CurrentUser) =>
-        user.name === username && user.password === password
+      (user) => user.name === username && user.password === password
     );
 
     if (user) {
-      setCurrentUser(user);
-      sessionStorage.setItem("currentUser", JSON.stringify(user));
+      setCurrentUserAPI(user as unknown as CurrentUser);
+      setCurrentUser(user as unknown as CurrentUser);
       setError("");
       router.push("/");
     } else {

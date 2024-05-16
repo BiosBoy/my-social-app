@@ -17,8 +17,8 @@ export interface Friend {
 }
 
 export interface User {
-  friends: Friend[];
-  id: 1;
+  friends?: Friend[];
+  id: string;
   name: string;
   password: string;
 }

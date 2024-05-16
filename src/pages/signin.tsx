@@ -1,8 +1,3 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { CurrentUser } from "@/interfaces/data";
-import getUsers from "@/api/getUsers";
-import { useAuth } from "@/auth/AuthContext";
 import useSignin from "@/hooks/useSignin";
 
 const Signin = () => {

@@ -3,6 +3,8 @@ import { User } from "@/interfaces/data";
 import getUsers from "@/api/getUsers";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import setUsers from "@/api/setUsers";
+import setCurrentUserAPI from "@/api/setCurrentUser";
 
 const useSignup = () => {
   const [username, setUsername] = useState("");
@@ -42,15 +44,15 @@ const useSignup = () => {
       return;
     }
     if (username.length > 3 && password.length > 3 && !error) {
-      const user = {
+      const user: User = {
         id: Math.random().toString(36),
         name: username,
         password,
       };
       users.push({ ...user, friends: [] });
+      setCurrentUserAPI(user);
+      setUsers(users);
       setCurrentUser(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      sessionStorage.setItem("currentUser", JSON.stringify(user));
       setError("");
       router.push("/");
     }

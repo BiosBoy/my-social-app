@@ -20,6 +20,10 @@ const usePosts = () => {
     title: string;
     description: string;
   }) => {
+    if (!currentUser) {
+      return;
+    }
+
     const posts = getPosts();
     posts.push({
       author: {
@@ -28,9 +32,9 @@ const usePosts = () => {
       },
       title,
       description,
-      date: new Date().toISOString(),
+      date: Number(new Date().toISOString()),
     });
-    localStorage.setItem("posts", JSON.stringify(posts));
+    setPosts(posts);
     window.location.reload();
   };
 

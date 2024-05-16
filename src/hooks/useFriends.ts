@@ -1,17 +1,18 @@
 import { useAuth } from "@/auth/AuthContext";
-import { CurrentUser, Friend, User } from "@/interfaces/data";
+import { Friend, User } from "@/interfaces/data";
 import getUsers from "@/api/getUsers";
 import { useState, useEffect, useCallback } from "react";
+import setUsers from "@/api/setUsers";
 
 const useFriends = () => {
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
   const { currentUser } = useAuth();
 
   useEffect(() => {
     const users = getUsers();
 
     const currentUserData = users.find(
-      (user: CurrentUser) => user.name === currentUser?.name
+      (user) => user.name === currentUser?.name
     );
 
     setFriends(currentUserData?.friends || []);
@@ -25,17 +26,17 @@ const useFriends = () => {
         user.name === currentUser?.name
           ? {
               ...user,
-              friends: user.friends.filter(
+              friends: user.friends?.filter(
                 (item: Friend) => item.name !== friend.name
               ),
             }
           : user
       );
 
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setUsers(updatedUsers);
       setFriends(
-        updatedUsers.find((user: User) => user.name === currentUser?.name)
-          .friends
+        updatedUsers?.find((user) => user.name === currentUser?.name)
+          ?.friends || []
       );
     },
     [currentUser?.name]

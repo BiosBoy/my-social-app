@@ -2,11 +2,11 @@ import sortByDate from "@/utils/sortByDate";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CurrentUser, Friend, Post, User } from "@/interfaces/data";
-import getPosts from "@/api/getPosts";
 import getUsers from "@/api/getUsers";
 import { useAuth } from "@/auth/AuthContext";
 import withAuth from "@/auth/withAuth";
 import usePosts from "@/hooks/usePosts";
+import setUsers from "@/api/setUsers";
 
 const UserProfile = () => {
   const router = useRouter();
@@ -28,8 +28,12 @@ const UserProfile = () => {
       (user: CurrentUser) => user.name === currentUser?.name
     );
 
+    if (!currentUserData?.friends) {
+      return;
+    }
+
     setIsFriend(
-      currentUserData?.friends.some((item: Friend) => item.name === username)
+      currentUserData?.friends?.some((item: Friend) => item.name === username)
     );
   }, [currentUser, username]);
 
@@ -39,10 +43,14 @@ const UserProfile = () => {
     const updatedUsers = users.map((item: User) => ({
       ...item,
       friends: isFriend
-        ? item.friends.filter((friend: Friend) => friend.name !== username)
-        : [...item.friends, { name: username }],
+        ? item.friends?.filter((friend: Friend) => friend.name !== username)
+        : [
+            ...(item.friends || []),
+            // TODO: fix it by adding user's id from users array here
+            { id: "undefined", name: username as string },
+          ],
     }));
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    setUsers(updatedUsers);
     setIsFriend(!isFriend);
   }, [isFriend, username]);
 
