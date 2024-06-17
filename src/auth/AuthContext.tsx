@@ -28,7 +28,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const data = getCurrentUser();
 
     setCurrentUser(
-      !data || data === "{}" || !Object.keys(data).length ? null : data
+      !data || (data as unknown as string) === "{}" || !Object.keys(data).length
+        ? null
+        : data
     );
   }, []);
 
