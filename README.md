@@ -77,3 +77,7 @@ On screens which have the space available for it we want to display every menu i
 The username tied to any post should navigate to the corresponding /:username page.
 On every page, for authenticated users only, we want to display a big (+) button which opens a modal containing a form with a message field. Submitting the form saves the post to LocalStorage.
 We don’t care too much about the visual side of things or whether animations are present (both can be a plus though). If you desire to work with an aesthetic, we like monospace, monochrome, hotpink, brackets for textual [buttons], and parentheses for (i) icon buttons.
+
+<img width="756" alt="Screenshot 2024-07-08 at 13 10 27" src="https://github.com/BiosBoy/my-social-app/assets/30953392/27203b36-2e19-456c-adf8-eaf35478011f">
+<img width="774" alt="Screenshot 2024-07-08 at 13 10 33" src="https://github.com/BiosBoy/my-social-app/assets/30953392/472dc0bb-6452-4dca-8c3a-6b715d2a1b1e">
+
