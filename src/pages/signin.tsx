@@ -1,4 +1,5 @@
-import useSignin from "@/hooks/useSignin";
+import useSignin from '@/hooks/useSignin'
+import { ChangeEvent } from 'react'
 
 const Signin = () => {
   const {
@@ -8,12 +9,18 @@ const Signin = () => {
     onPasswordChange,
     onSubmit,
     error,
-  } = useSignin();
+  } = useSignin()
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit();
-  };
+    e.preventDefault()
+    onSubmit()
+  }
+
+  const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) =>
+    onUsernameChange(e.target.value)
+
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) =>
+    onUsernameChange(e.target.value)
 
   return (
     <div>
@@ -21,25 +28,23 @@ const Signin = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => onUsernameChange(e.target.value)}
-          />
+          <input type="text" value={username} onChange={handleChangeUsername} />
         </div>
+
         <div>
           <label>Password:</label>
           <input
             type="password"
             value={password}
-            onChange={(e) => onPasswordChange(e.target.value)}
+            onChange={handleChangePassword}
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Sign In</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Signin;
+export default Signin

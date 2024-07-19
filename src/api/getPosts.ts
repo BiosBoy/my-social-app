@@ -1,13 +1,10 @@
-import { Post } from "@/interfaces/data";
+import { Post } from '@/interfaces/data'
+import { isNull } from '@/utils/isNull'
 
 const getPosts = (): Post[] => {
-  const posts = localStorage.getItem("posts");
+  const posts = localStorage.getItem('posts')
 
-  if (!posts || posts === "undefined") {
-    return [];
-  }
+  return isNull(posts) ? [] : JSON.parse(posts!)
+}
 
-  return JSON.parse(posts);
-};
-
-export default getPosts;
+export default getPosts

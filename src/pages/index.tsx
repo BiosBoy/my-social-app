@@ -1,7 +1,7 @@
-import usePosts from "@/hooks/usePosts";
+import usePosts from '@/hooks/usePosts'
 
 const Home = () => {
-  const { posts } = usePosts();
+  const { posts } = usePosts()
 
   return (
     <div>
@@ -14,7 +14,7 @@ const Home = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

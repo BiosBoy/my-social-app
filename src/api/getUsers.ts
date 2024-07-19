@@ -1,13 +1,10 @@
-import { User } from "@/interfaces/data";
+import { User } from '@/interfaces/data'
+import { isNull } from '@/utils/isNull'
 
 const getUsers = (): User[] => {
-  const users = localStorage.getItem("users");
+  const users = localStorage.getItem('users')
 
-  if (!users || users === "undefined") {
-    return [];
-  }
+  return isNull(users) ? [] : JSON.parse(users!)
+}
 
-  return JSON.parse(users);
-};
-
-export default getUsers;
+export default getUsers

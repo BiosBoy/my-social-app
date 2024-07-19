@@ -1,13 +1,12 @@
-import { CurrentUser } from "@/interfaces/data";
+import { CurrentUser } from '@/interfaces/data'
+import { isNull } from '@/utils/isNull'
 
 const getCurrentUser = (): CurrentUser => {
-  const currentUser = sessionStorage.getItem("currentUser");
+  const currentUser = sessionStorage.getItem('currentUser')
 
-  if (!currentUser || currentUser === "undefined") {
-    return {} as CurrentUser;
-  }
+  return isNull(currentUser)
+    ? ({} as CurrentUser)
+    : (JSON.parse(currentUser!) as CurrentUser)
+}
 
-  return JSON.parse(currentUser);
-};
-
-export default getCurrentUser;
+export default getCurrentUser

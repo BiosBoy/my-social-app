@@ -1,42 +1,40 @@
-"use client";
+'use client'
 
-import { CurrentUser } from "@/interfaces/data";
-import getCurrentUser from "@/api/getCurrentUser";
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { CurrentUser } from '@/interfaces/data'
+import getCurrentUser from '@/api/getCurrentUser'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 
 interface AuthContextType {
-  currentUser: CurrentUser | null;
-  setCurrentUser: (user: CurrentUser | null) => void;
+  currentUser: CurrentUser | null
+  setCurrentUser: (user: CurrentUser | null) => void
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthContext)
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider')
   }
-  return context;
-};
+  return context
+}
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null)
 
   useEffect(() => {
-    const data = getCurrentUser();
+    const data = getCurrentUser()
 
     setCurrentUser(
-      !data || (data as unknown as string) === "{}" || !Object.keys(data).length
+      !data || (data as unknown as string) === '{}' || !Object.keys(data).length
         ? null
         : data
-    );
-  }, []);
+    )
+  }, [])
 
   return (
     <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}

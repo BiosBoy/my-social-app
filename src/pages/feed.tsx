@@ -1,21 +1,21 @@
-import { CurrentUser, Friend, Post } from "@/interfaces/data";
-import { useMemo } from "react";
-import sortByDate from "@/utils/sortByDate";
-import withAuth from "@/auth/withAuth";
-import getUsers from "@/api/getUsers";
-import { useAuth } from "@/auth/AuthContext";
-import usePosts from "@/hooks/usePosts";
+import { CurrentUser, Friend, Post } from '@/interfaces/data'
+import { useMemo } from 'react'
+import sortByDate from '@/utils/sortByDate'
+import withAuth from '@/auth/withAuth'
+import getUsers from '@/api/getUsers'
+import { useAuth } from '@/auth/AuthContext'
+import usePosts from '@/hooks/usePosts'
 
 const Feed = () => {
-  const { posts } = usePosts();
-  const { currentUser } = useAuth();
+  const { posts } = usePosts()
+  const { currentUser } = useAuth()
 
   const sortedPosts = useMemo(() => {
-    const users = getUsers();
+    const users = getUsers()
 
     const currentUserData = users.find(
       (user: CurrentUser) => user.name === currentUser?.name
-    );
+    )
 
     return sortByDate(
       posts.filter((post: Post) =>
@@ -23,8 +23,8 @@ const Feed = () => {
           (item: Friend) => item.name === post.author.name
         )
       )
-    );
-  }, [posts, currentUser]);
+    )
+  }, [posts, currentUser])
 
   return (
     <div>
@@ -41,7 +41,7 @@ const Feed = () => {
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default withAuth(Feed);
+export default withAuth(Feed)

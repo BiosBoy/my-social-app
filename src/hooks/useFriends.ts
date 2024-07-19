@@ -1,26 +1,26 @@
-import { useAuth } from "@/auth/AuthContext";
-import { Friend, User } from "@/interfaces/data";
-import getUsers from "@/api/getUsers";
-import { useState, useEffect, useCallback } from "react";
-import setUsers from "@/api/setUsers";
+import getUsers from '@/api/getUsers'
+import setUsers from '@/api/setUsers'
+import { useAuth } from '@/auth/AuthContext'
+import { Friend, User } from '@/interfaces/data'
+import { useCallback, useEffect, useState } from 'react'
 
 const useFriends = () => {
-  const [friends, setFriends] = useState<Friend[]>([]);
-  const { currentUser } = useAuth();
+  const [friends, setFriends] = useState<Friend[]>([])
+  const { currentUser } = useAuth()
 
   useEffect(() => {
-    const users = getUsers();
+    const users = getUsers()
 
     const currentUserData = users.find(
       (user) => user.name === currentUser?.name
-    );
+    )
 
-    setFriends(currentUserData?.friends || []);
-  }, [currentUser]);
+    setFriends(currentUserData?.friends ?? [])
+  }, [currentUser])
 
   const onFriendsChange = useCallback(
     (friend: Friend) => {
-      const users = getUsers();
+      const users = getUsers()
 
       const updatedUsers = users.map((user: User) =>
         user.name === currentUser?.name
@@ -31,18 +31,18 @@ const useFriends = () => {
               ),
             }
           : user
-      );
+      )
 
-      setUsers(updatedUsers);
+      setUsers(updatedUsers)
       setFriends(
         updatedUsers?.find((user) => user.name === currentUser?.name)
-          ?.friends || []
-      );
+          ?.friends ?? []
+      )
     },
     [currentUser?.name]
-  );
+  )
 
-  return { friends, onFriendsChange };
-};
+  return { friends, onFriendsChange }
+}
 
-export default useFriends;
+export default useFriends

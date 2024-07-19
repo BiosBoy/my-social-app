@@ -1,20 +1,22 @@
-"use client";
-import Link from "next/link";
-import { useAuth } from "@/auth/AuthContext";
-import { useState } from "react";
-import Image from "next/image";
+'use client'
+import Link from 'next/link'
+import { useAuth } from '@/auth/AuthContext'
+import { useState } from 'react'
+import Image from 'next/image'
 
 const NavBar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth()
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
     <div className="navMenu">
       <div className="logoWrap">
         <Image
           alt="logo"
-          src={require("../static/images/logo.svg")}
+          src={require('../static/images/logo.svg')}
           width={75}
           height={20}
         />
@@ -22,11 +24,11 @@ const NavBar = () => {
       <button
         className="burgerMenu"
         aria-label={`mobile menu ${isMenuOpen}`}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={handleToggleMenu}
       >
         Menu
       </button>
-      <nav className={(isMenuOpen && " open") || ""}>
+      <nav className={(isMenuOpen && ' open') || ''}>
         {currentUser?.name ? (
           <>
             <Link href="/">Home</Link>
@@ -44,7 +46,7 @@ const NavBar = () => {
         )}
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar
