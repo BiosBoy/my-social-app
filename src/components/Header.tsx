@@ -1,13 +1,11 @@
-import NavBar from "@/components/NavBar";
-import AddPostModal from "@/components/AddPostModal";
+import NavBar from '@/components/NavBar'
+import AddPostModal from '@/components/AddPostModal'
 
-const Header = () => {
-  return (
-    <div className="header">
-      <AddPostModal />
-      <NavBar />
-    </div>
-  );
-};
+const Header = () => (
+  <div className="header">
+    <AddPostModal />
+    <NavBar />
+  </div>
+)
 
-export default Header;
+export default Header

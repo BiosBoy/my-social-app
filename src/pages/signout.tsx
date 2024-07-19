@@ -1,13 +1,13 @@
-import useSignout from "@/hooks/useSignout";
+import useSignout from '@/hooks/useSignout'
 
 const Signout = () => {
-  useSignout();
+  useSignout()
 
   return (
     <div>
       <p>You have been signed out.</p>
     </div>
-  );
-};
+  )
+}
 
-export default Signout;
+export default Signout

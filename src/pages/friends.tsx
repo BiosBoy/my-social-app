@@ -1,13 +1,14 @@
-import { Friend } from "@/interfaces/data";
-import withAuth from "@/auth/withAuth";
-import useFriends from "@/hooks/useFriends";
+import { Friend } from '@/interfaces/data'
+import withAuth from '@/auth/withAuth'
+import useFriends from '@/hooks/useFriends'
 
 const Friends = () => {
-  const { friends, onFriendsChange } = useFriends();
+  const { friends, onFriendsChange } = useFriends()
 
   return (
     <div>
       <h1>My Friends</h1>
+
       <ul>
         {!friends?.length ? (
           <p>No friends yet</p>
@@ -21,7 +22,7 @@ const Friends = () => {
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default withAuth(Friends);
+export default withAuth(Friends)

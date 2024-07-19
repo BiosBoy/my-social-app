@@ -1,24 +1,24 @@
 export interface Post {
-  date: number | string;
-  title: string;
-  description: string;
-  author: Friend;
+  date: number | string
+  title: string
+  description: string
+  author: Friend
 }
 
 export interface CurrentUser {
-  password: string;
-  name: string;
-  id: string;
+  password: string
+  name: string
+  id: number
 }
 
 export interface Friend {
-  name: string;
-  id: string;
+  name: string
+  id: number
 }
 
 export interface User {
-  friends?: Friend[];
-  id: string;
-  name: string;
-  password: string;
+  friends?: Friend[]
+  id: number
+  name: string
+  password: string
 }

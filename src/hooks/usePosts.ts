@@ -1,26 +1,26 @@
-import { useAuth } from "@/auth/AuthContext";
-import { Post } from "@/interfaces/data";
-import getPosts from "@/api/getPosts";
-import { useEffect, useState } from "react";
-import setPosts from "@/api/setPosts";
+import getPosts from '@/api/getPosts'
+import setPosts from '@/api/setPosts'
+import { useAuth } from '@/auth/AuthContext'
+import { Post } from '@/interfaces/data'
+import { useEffect, useState } from 'react'
 
 const usePosts = () => {
-  const [posts, setStatePosts] = useState<Post[]>([]);
-  const { currentUser } = useAuth();
+  const [posts, setStatePosts] = useState<Post[]>([])
+  const { currentUser } = useAuth()
 
   useEffect(() => {
-    setStatePosts(getPosts());
-  }, []);
+    setStatePosts(getPosts())
+  }, [])
 
   const onUpdatePosts = ({
     title,
     description,
   }: {
-    title: string;
-    description: string;
+    title: string
+    description: string
   }) => {
     if (!currentUser) {
-      return;
+      return
     }
 
     const newPosts = [
@@ -34,14 +34,14 @@ const usePosts = () => {
         description,
         date: new Date().toISOString(),
       },
-    ];
+    ]
 
-    setStatePosts(newPosts);
-    setPosts(newPosts);
-    window.location.reload();
-  };
+    setStatePosts(newPosts)
+    setPosts(newPosts)
+    window.location.reload()
+  }
 
-  return { posts, onUpdatePosts };
-};
+  return { posts, onUpdatePosts }
+}
 
-export default usePosts;
+export default usePosts
